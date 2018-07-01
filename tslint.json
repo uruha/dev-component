@@ -1,0 +1,11 @@
+{
+    "defaultSeverity": "error",
+    "extends": ["tslint-xo", "tslint-config-prettier"],
+    "rulesDirectory": ["tslint-plugin-prettier"],
+    "rules": {
+        "semicolon": [true, "always"],
+        "quotemark": [true, "single"],
+        "type-literal-delimiter": false,
+        "prettier": true
+    }
+}
