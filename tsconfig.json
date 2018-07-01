@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "moduleResolution": "node",
+        "removeComments": true,
+        "noImplicitAny": true,
+        "noLib" : false,
+        "declaration" : false,
+        "preserveConstEnums": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "sourceMap": false,
+        "allowSyntheticDefaultImports": true,
+        "plugins": [
+            {
+                "name": "typescript-lit-html-plugin"
+            }
+        ]
+    }
+}
