@@ -15,33 +15,7 @@
     <div>
         Web Components !
     </div>
-    <hello-tag>
-        <h1>Hello Component !</h1>
-    </hello-tag>
-    <template id="hello">
-        <style>
-            div {
-                padding: 14px;
-                margin: 0;
-            }
-        </style>
-        <div>
-            <content></content>
-        </div>
-    </template>
-    <script>
-        class Hello extends HTMLElement {
-            constructor() {
-                super();
-                const template = document.getElementById('hello');
-                const node = document.importNode(template.content, true);
-
-                this.createShadowRoot();
-                this.shadowRoot.appendChild(node);
-            }
-        }
-        customElements.define('hello-tag', Hello);
-    </script>
+    <hello-tag data-name="Typescript"></hello-tag>
     <script src="./dist/index.js"></script>
 </body>
 </html>
