@@ -20,6 +20,7 @@ function serve(done) {
 
 function watch() {
     gulp.watch('./*.html', gulp.series(reload));
+    gulp.watch('./dist/*.js', gulp.series(reload));
 }
 
 gulp.task('default', gulp.series(serve, watch));

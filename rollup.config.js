@@ -12,7 +12,8 @@ export default {
         resolve({
             browser: true,
             jsnext: true,
-            preferBuiltins: false
+            preferBuiltins: false,
+            extensions: ['.ts', '.js', '.json']
         }),
         commonjs({
             include: 'node_modules/**'
