@@ -4,7 +4,8 @@
   "description": "experience for web components",
   "main": "index.js",
   "scripts": {
-    "dev": "gulp",
+    "serve": "gulp",
+    "build": "rollup -c",
     "watch": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
