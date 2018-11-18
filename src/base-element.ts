@@ -1,5 +1,4 @@
-import { render } from 'lit-html/lib/lit-extended';
-import { TemplateResult } from 'lit-html';
+import { render, TemplateResult } from 'lit-html';
 
 const connected = new WeakMap();
 

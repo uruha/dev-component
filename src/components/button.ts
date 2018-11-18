@@ -1,5 +1,5 @@
 import { BaseElement } from '../base-element';
-import { html } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html';
 
 const ATTR = {
     DATA_COLOR: 'data-color'
@@ -43,13 +43,14 @@ export default class Button extends BaseElement {
         .pink {
             background-color: #ea618e;
         }
+        .green {
+            background-color: #2cb4ad;
+        }
         </style>
         <button
             type="button"
-            class$="${c}"
-            on-click="${e => {
-                this.onClick(e);
-            }}"
+            class="${c}"
+            @click="${this.onClick}"
         >
             <slot name="label" />
         </button>

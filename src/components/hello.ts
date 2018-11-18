@@ -1,5 +1,5 @@
 import { BaseElement } from '../base-element';
-import { html } from 'lit-html/lib/lit-extended';
+import { html } from 'lit-html';
 
 const ATTR = {
     DATA_NAME: 'data-name'
@@ -34,16 +34,14 @@ export default class Hello extends BaseElement {
     render() {
         const { n } = { n: name.get(this) };
         return html`
-        <style>
-        div {
-            padding: 14px;
-            margin: 0;
-            color: #4d4398;
-        }
-        </style>
-        <div>
-            Hello ${n}
-        </div>
+            <style>
+                div {
+                    padding: 14px;
+                    margin: 0;
+                    color: #4d4398;
+                }
+            </style>
+            <div>Hello ${n}</div>
         `;
     }
 }
