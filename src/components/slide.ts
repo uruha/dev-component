@@ -1,16 +1,47 @@
 import { BaseElement } from '../base-element';
 import { html } from 'lit-html';
 
+const ATTR = {
+    DATA_WIDTH: 'data-width',
+    DATA_HEIGHT: 'data-height'
+};
+const width = new WeakMap();
+const height = new WeakMap();
+
 export default class Slide extends BaseElement {
     slideNum: number;
+
+    static get observedAttributes() {
+        return [ATTR.DATA_WIDTH, ATTR.DATA_HEIGHT];
+    }
 
     constructor() {
         super();
         this.slideNum = this.querySelectorAll('li').length;
     }
 
-    private createKeyframe(length: number): string {
-        if (length) {
+    attributeChangedCallback(attr: string, prev: any, next: any) {
+        if (prev === next) {
+            return;
+        }
+        switch (attr) {
+            case ATTR.DATA_WIDTH:
+                width.set(this, next);
+                break;
+            case ATTR.DATA_HEIGHT:
+                height.set(this, next);
+                break;
+            default:
+                width.set(this, 960);
+                height.set(this, 300);
+        }
+        if (this.connected) {
+            this.update();
+        }
+    }
+
+    private createKeyframe(length: number, slideWidth: number): string {
+        if (!length) {
             return;
         }
 
@@ -20,17 +51,22 @@ export default class Slide extends BaseElement {
         }
         return frame
             .map((v, i) => {
-                return `${v}% { transform: translate(${(i + 1) * -960}px) }`;
+                return `${v}% { transform: translate(${(i + 1) *
+                    -slideWidth}px) }`;
             })
             .join('\n');
     }
 
     render() {
+        const { w, h } = {
+            w: width.get(this),
+            h: height.get(this)
+        };
         return html`
             <style>
             .slide-container {
-                width: 960px;
-                height: 300px;
+                width: ${w}px;
+                height: ${h}px;
                 margin: 0 auto;
                 overflow: hidden;
             }
@@ -47,15 +83,15 @@ export default class Slide extends BaseElement {
             ::slotted(li) {
                 position: relative;
                 text-align: center;
-                width: 960px;
-                height: 300px;
+                width: ${w}px;
+                height: ${h}px;
                 background-color: #eee;
             }
             @keyframes slider {
                 0% {
                     transform: translate(0);
                 }
-                ${this.createKeyframe(this.slideNum)}
+                ${this.createKeyframe(this.slideNum, w)}
                 100% {
                     transform: translate(0)
                 }
