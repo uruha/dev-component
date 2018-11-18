@@ -9,10 +9,14 @@ export default class Slide extends BaseElement {
         this.slideNum = this.querySelectorAll('li').length;
     }
 
-    createKeyframe(length: number): string {
+    private createKeyframe(length: number): string {
+        if (length) {
+            return;
+        }
+
         const frame = [];
-        for (let index = 1; index < length; index++) {
-            frame.push(Math.floor((100 / length) * index));
+        for (let i = 1; i < length; i++) {
+            frame.push(Math.floor((100 / length) * i));
         }
         return frame
             .map((v, i) => {
