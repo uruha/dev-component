@@ -7,8 +7,7 @@
     "serve": "gulp",
     "build": "rollup -c",
     "watch": "rollup -c -w",
-    "lint": "tslint 'src/**/*.ts'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "tslint 'src/**/*.ts'"
   },
   "repository": {
     "type": "git",
