@@ -3,22 +3,25 @@ import { render, TemplateResult } from 'lit-html';
 const connected = new WeakMap();
 
 export class BaseElement extends HTMLElement {
-    get connected() {
+    /**
+     * @TODO elucidate connected type
+     */
+    get connected(): any {
         return connected.get(this);
     }
 
-    connectedCallback(update: boolean = true) {
+    connectedCallback(update = true): void {
         connected.set(this, true);
         if (update) {
             this.update();
         }
     }
 
-    disconnectedCallback() {
+    disconnectedCallback(): void {
         connected.delete(this);
     }
 
-    private _render(template: TemplateResult) {
+    private _render(template: TemplateResult): void {
         render(
             template,
             this.shadowRoot || this.attachShadow({ mode: 'open' })
@@ -26,7 +29,7 @@ export class BaseElement extends HTMLElement {
         this.renderedCallback();
     }
 
-    protected update() {
+    protected update(): void {
         const template = this.render();
         if (template) {
             this._render(template);
@@ -37,7 +40,7 @@ export class BaseElement extends HTMLElement {
         throw new Error('Render function not Implemented');
     }
 
-    protected renderedCallback() {
+    protected renderedCallback(): void {
         // Empty
     }
 }

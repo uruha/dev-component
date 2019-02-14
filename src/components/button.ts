@@ -1,5 +1,5 @@
 import { BaseElement } from '../base-element';
-import { html } from 'lit-html';
+import { html, TemplateResult } from 'lit-html';
 
 const ATTR = {
     DATA_COLOR: 'data-color'
@@ -8,7 +8,7 @@ const ATTR = {
 const color = new WeakMap();
 
 export default class Button extends BaseElement {
-    static get observedAttributes() {
+    static get observedAttributes(): string[] {
         return [ATTR.DATA_COLOR];
     }
 
@@ -16,7 +16,7 @@ export default class Button extends BaseElement {
         super();
     }
 
-    attributeChangedCallback(attr: string, prev: any, next: any) {
+    attributeChangedCallback(attr: string, prev: any, next: any): void {
         if (prev === next) {
             return;
         }
@@ -31,33 +31,29 @@ export default class Button extends BaseElement {
         }
     }
 
-    render() {
+    render(): TemplateResult {
         const { c } = { c: color.get(this) };
         return html`
-        <style>
-        button {
-            border: none;
-            border-radius: 3px;
-            padding: 10px 20px;
-        }
-        .pink {
-            background-color: #ea618e;
-        }
-        .green {
-            background-color: #2cb4ad;
-        }
-        </style>
-        <button
-            type="button"
-            class="${c}"
-            @click="${this.onClick}"
-        >
-            <slot name="label" />
-        </button>
+            <style>
+                button {
+                    border: none;
+                    border-radius: 3px;
+                    padding: 10px 20px;
+                }
+                .pink {
+                    background-color: #ea618e;
+                }
+                .green {
+                    background-color: #2cb4ad;
+                }
+            </style>
+            <button type="button" class="${c}" @click="${this.onClick}">
+                <slot name="label" />
+            </button>
         `;
     }
 
-    onClick(e) {
+    onClick(e): void {
         console.log(e);
     }
 }

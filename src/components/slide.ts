@@ -1,5 +1,5 @@
 import { BaseElement } from '../base-element';
-import { html } from 'lit-html';
+import { html, TemplateResult } from 'lit-html';
 
 const ATTR = {
     DATA_WIDTH: 'data-width',
@@ -11,7 +11,7 @@ const height = new WeakMap();
 export default class Slide extends BaseElement {
     slideNum: number;
 
-    static get observedAttributes() {
+    static get observedAttributes(): string[] {
         return [ATTR.DATA_WIDTH, ATTR.DATA_HEIGHT];
     }
 
@@ -20,7 +20,7 @@ export default class Slide extends BaseElement {
         this.slideNum = this.querySelectorAll('li').length;
     }
 
-    attributeChangedCallback(attr: string, prev: any, next: any) {
+    attributeChangedCallback(attr: string, prev: any, next: any): void {
         if (prev === next) {
             return;
         }
@@ -57,7 +57,7 @@ export default class Slide extends BaseElement {
             .join('\n');
     }
 
-    render() {
+    render(): TemplateResult {
         const { w, h } = {
             w: width.get(this),
             h: height.get(this)

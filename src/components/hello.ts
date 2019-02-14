@@ -1,5 +1,5 @@
 import { BaseElement } from '../base-element';
-import { html } from 'lit-html';
+import { html, TemplateResult } from 'lit-html';
 
 const ATTR = {
     DATA_NAME: 'data-name'
@@ -8,7 +8,7 @@ const ATTR = {
 const name = new WeakMap();
 
 export default class Hello extends BaseElement {
-    static get observedAttributes() {
+    static get observedAttributes(): string[] {
         return [ATTR.DATA_NAME];
     }
 
@@ -16,7 +16,7 @@ export default class Hello extends BaseElement {
         super();
     }
 
-    attributeChangedCallback(attr: string, prev: any, next: any) {
+    attributeChangedCallback(attr: string, prev: any, next: any): void {
         if (prev === next) {
             return;
         }
@@ -31,7 +31,7 @@ export default class Hello extends BaseElement {
         }
     }
 
-    render() {
+    render(): TemplateResult {
         const { n } = { n: name.get(this) };
         return html`
             <style>
