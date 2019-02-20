@@ -17,7 +17,7 @@ export default class Slide extends BaseElement {
 
     constructor() {
         super();
-        this.slideNum = this.querySelectorAll('li').length;
+        this.slideNum = this.querySelectorAll('slide-item').length;
     }
 
     attributeChangedCallback(attr: string, prev: any, next: any): void {
@@ -64,43 +64,45 @@ export default class Slide extends BaseElement {
         };
         return html`
             <style>
-            .slide-container {
-                width: ${w}px;
-                height: ${h}px;
-                margin: 0 auto;
-                overflow: hidden;
-            }
-            .items {
-                display: flex;
-                position: relative;
-                left: 0;
-                width: calc(100% * ${this.slideNum});
-                list-style-type: none;
-                padding: 0;
-                margin: 0;
-                animation: slider 20s infinite ease;
-            }
-            ::slotted(li) {
-                position: relative;
-                text-align: center;
-                width: ${w}px;
-                height: ${h}px;
-                background-color: #eee;
-            }
-            @keyframes slider {
-                0% {
-                    transform: translate(0);
+                .slide-container {
+                    width: ${w}px;
+                    height: ${h}px;
+                    margin: 0 auto;
+                    overflow: hidden;
                 }
-                ${this.createKeyframe(this.slideNum, w)}
-                100% {
-                    transform: translate(0)
+                .slide-items {
+                    display: flex;
+                    position: relative;
+                    left: 0;
+                    width: calc(100% * ${this.slideNum});
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+                    animation: slider 20s infinite ease;
                 }
-            }
+                ::slotted(slide-item) {
+                    position: relative;
+                    text-align: center;
+                    background-color: #eee;
+                    width: ${w}px;
+                    height: ${h}px;
+                }
+                @keyframes slider {
+                    0% {
+                        transform: translate(0);
+                    }
+                    ${this.createKeyframe(this.slideNum, w)}
+                    100% {
+                        transform: translate(0);
+                    }
+                }
             </style>
             <div class="slide-container">
-                <ul class="items">
-                    <slot name="item" />
-                        <li>default</li>
+                <ul class="slide-items">
+                    <slot>
+                        <slide-item>
+                            <span name="content">default</span>
+                        </slide-item>
                     </slot>
                 </ul>
             </div>
