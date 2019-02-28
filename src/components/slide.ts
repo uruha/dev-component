@@ -91,8 +91,7 @@ export default class Slide extends BaseElement {
                     0% {
                         transform: translate(0);
                     }
-                    ${this.createKeyframe(this.slideNum, w)}
-                    100% {
+                    ${this.createKeyframe(this.slideNum, w)}100% {
                         transform: translate(0);
                     }
                 }
